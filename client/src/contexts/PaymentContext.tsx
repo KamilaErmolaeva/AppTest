@@ -1,17 +1,18 @@
 import { createContext, useContext, useState } from 'react';
 
+type PaymentStatus = 'process' | 'fail' | 'ok' | 'err' | null;
+
 type PaymentContextType = {
-  //   paymentStatus: 'process' | 'fail' | 'ok' | 'err' | null;
-  paymentStatus: string | null;
+  paymentStatus: PaymentStatus;
   paymentId: string | null;
-  setPaymentStatus: (status: string | null) => void;
+  setPaymentStatus: (status: PaymentStatus) => void;
   setPaymentId: (id: string | null) => void;
 };
 
 const PaymentContext = createContext<PaymentContextType | undefined>(undefined);
 
 export const PaymentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+  const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>(null);
   const [paymentId, setPaymentId] = useState<string | null>(null);
 
   return (
